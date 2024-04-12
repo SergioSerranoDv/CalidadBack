@@ -5,13 +5,8 @@ const dotenv = require("dotenv")
 const { mongoose } = require("mongoose")
 const { conectarDB } = require("../config/db")
 const usuarioRoutes = require("./routes/usuarioRoutes")
-const funcionalidadRoutes = require("./routes/funcionalidadRoutes")
-const fiabilidadRoutes = require("./routes/fiabilidadRoutes")
-const usabilidadRoutes = require("./routes/usabilidadRoutes")
-const eficienciaRoutes = require("./routes/eficienciaRoutes")
-const capacidadRoutes = require("./routes/capacidadRoutes")
-const portabilidadRoutes = require("./routes/portabilidadRoutes")
-const calidadRoutes = require("./routes/calidadRoutes")
+const atributosRoutes = require("./routes/atributosRoutes")
+const parametrosRoutes  = require('./routes/parametrosRoutes')
 
 const app = express()
 
@@ -30,13 +25,8 @@ dotenv.config()
 conectarDB()
 //Crear el routing
 app.use("/api/usuarios", usuarioRoutes)
-app.use("/api/funcionalidad", funcionalidadRoutes)
-app.use("/api/fiabilidad", fiabilidadRoutes)
-app.use("/api/usabilidad", usabilidadRoutes)
-app.use("/api/eficiencia", eficienciaRoutes)
-app.use("/api/capacidad", capacidadRoutes)
-app.use("/api/portabilidad", portabilidadRoutes)
-app.use("/api/calidad", calidadRoutes)
+app.use("/api/atributos", atributosRoutes)
+app.use("/api/parametro", parametrosRoutes)
 
 const PORT = process.env.PORT || 3230
 app.listen(PORT, () => {

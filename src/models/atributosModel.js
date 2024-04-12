@@ -1,43 +1,23 @@
 const mongoose = require("mongoose")
 
-const fiabilidadWangoSchema = mongoose.Schema(
+const atributoSchema = mongoose.Schema(
   {
-    v1: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
-    o1: {
+    item: {
       type: String,
-      required: false,
-      trim: true,
-    },
-    v2: {
-      type: Number,
       required: true,
       trim: true,
     },
-    o2: {
+    description: {
       type: String,
-      required: false,
+      required: true,
       trim: true,
     },
-    v3: {
+    valor: {
       type: Number,
       required: true,
       trim: true,
     },
-    o3: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-    v4: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
-    o4: {
+    observation: {
       type: String,
       required: false,
       trim: true,
@@ -58,5 +38,5 @@ const fiabilidadWangoSchema = mongoose.Schema(
   }
 )
 
-const fiabilidadWango = mongoose.model("Fiabilidad", fiabilidadWangoSchema)
-module.exports = fiabilidadWango
+const atributo = mongoose.model("atributo", atributoSchema)
+module.exports = atributo
