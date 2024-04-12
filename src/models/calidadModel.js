@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-
 const calidadWangoSchema = mongoose.Schema(
   {
     v1: {
