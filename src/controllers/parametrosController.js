@@ -30,7 +30,7 @@ const registrar = async (req, res) => {
 const eliminar = async (req, res) => {
   try {
     const { id } = req.params;
-    const parametroEliminado = await Parametros.findByIdAndDelete(id);
+    const parametroEliminado = await parametros.findByIdAndDelete(id); // Corregido aquí
     if (!parametroEliminado) {
       return res.status(404).json({ error: "El parámetro no fue encontrado" });
     }
@@ -41,7 +41,31 @@ const eliminar = async (req, res) => {
   }
 };
 
+const editar = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { item, description, preguntas, total } = req.body;
+
+    // Buscar el parámetro por su ID y actualizar sus campos
+    const parametroActualizado = await parametros.findByIdAndUpdate(
+      id,
+      { item, description, preguntas, total },
+      { new: true }
+    );
+
+    if (!parametroActualizado) {
+      return res.status(404).json({ error: "El parámetro no fue encontrado" });
+    }
+
+    res.json(parametroActualizado);
+  } catch (error) {
+    console.error("Error al actualizar el parámetro:", error);
+    res.status(500).json({ error: "Hubo un problema al actualizar el parámetro" });
+  }
+};
+
 module.exports = {
   registrar,
   eliminar,
+  editar,
 };

@@ -1,10 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const Parametros = require("../models/parametrosModel")
-const { registrar } = require("../controllers/parametrosController")
-const { eliminar } = require("../controllers/parametrosController")
+const { registrar, eliminar, editar } = require("../controllers/parametrosController")
 
-// Middleware CORS
 router.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE")
@@ -12,7 +10,6 @@ router.use(function (req, res, next) {
   next()
 })
 
-// Endpoint para obtener los datos de parámero
 router.get("/", async (req, res) => {
   try {
     const parametros = await Parametros.find()
@@ -23,6 +20,8 @@ router.get("/", async (req, res) => {
   }
 })
 
-router.delete("/:id", eliminar);
-router.post("/", registrar);
-module.exports = router;
+router.post("/", registrar)
+router.delete("/:id", eliminar)
+router.put("/:id", editar)
+
+module.exports = router
