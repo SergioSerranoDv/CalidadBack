@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const atributoSchema = mongoose.Schema(
+const atributosSchema = mongoose.Schema(
   {
     item: {
       type: String,
@@ -14,7 +14,7 @@ const atributoSchema = mongoose.Schema(
     },
     valor: {
       type: Number,
-      required: true,
+      required: false,
       trim: true,
     },
     observation: {
@@ -22,15 +22,9 @@ const atributoSchema = mongoose.Schema(
       required: false,
       trim: true,
     },
-    totalPoints: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
-    percentage: {
-      type: Number,
-      required: true,
-      trim: true,
+    parametro: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "parametros",
     },
   },
   {
@@ -38,5 +32,5 @@ const atributoSchema = mongoose.Schema(
   }
 )
 
-const atributo = mongoose.model("atributo", atributoSchema)
-module.exports = atributo
+const atributos = mongoose.model("Atributo", atributosSchema)
+module.exports = atributos

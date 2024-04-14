@@ -20,6 +20,19 @@ router.get("/", async (req, res) => {
   }
 })
 
+router.get("/:id", async (req, res) => {
+  try {
+    const parametro = await Parametros.findById(req.params.id);
+    if (!parametro) {
+      return res.status(404).json({ error: "Parámetro no encontrado" });
+    }
+    res.json(parametro);
+  } catch (error) {
+    console.error("Error al obtener el parámetro por ID:", error);
+    res.status(500).json({ error: "Hubo un problema al obtener el parámetro por ID" });
+  }
+});
+
 router.post("/", registrar)
 router.delete("/:id", eliminar)
 router.put("/:id", editar)
