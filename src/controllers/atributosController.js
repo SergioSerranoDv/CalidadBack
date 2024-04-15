@@ -3,7 +3,7 @@ const atributos = require("../models/atributosModel");
 const registrar = async (req, res) => {
   try {
     console.log("Inicio del registro de formulario...");
-    const { item, description, valor, observation, idParametro } = req.body;
+    const { item, description, valor, observation, parametro } = req.body;
 
     console.log("Datos recibidos:", req.body);
 
@@ -12,7 +12,7 @@ const registrar = async (req, res) => {
       description,
       valor,
       observation,
-      parametro: idParametro // Asegúrate de que idParametro sea un ObjectId válido
+      parametro
     });
 
     console.log("Objeto de atributo creado:", nuevoAtributo);
