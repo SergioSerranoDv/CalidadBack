@@ -12,6 +12,14 @@ const parametrosSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    valor: {
+      type: Number,
+      trim: true,
+    },
+    percentage: {
+      type: Number,
+      trim: true,
+    },
   },
   {
     timestamps: true,

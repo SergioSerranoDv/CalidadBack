@@ -3,15 +3,15 @@ const parametros = require("../models/parametrosModel");
 const registrar = async (req, res) => {
   try {
     console.log("Inicio del registro de formulario...");
-    const { item, description, preguntas, total } = req.body;
+    const { item, description, valor, percentage } = req.body;
 
     console.log("Datos recibidos:", req.body);
 
     const nuevoParametro = new parametros({
       item,
       description,
-      preguntas,
-      total,
+      valor,
+      percentage,
     });
 
     console.log("Objeto de parámetro creado:", nuevoParametro);
@@ -44,12 +44,12 @@ const eliminar = async (req, res) => {
 const editar = async (req, res) => {
   try {
     const { id } = req.params;
-    const { item, description, preguntas, total } = req.body;
+    const { item, description, valor, percentage } = req.body;
 
     // Buscar el parámetro por su ID y actualizar sus campos
     const parametroActualizado = await parametros.findByIdAndUpdate(
       id,
-      { item, description, preguntas, total },
+      { item, description, valor, percentage },
       { new: true }
     );
 
