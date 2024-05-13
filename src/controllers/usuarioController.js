@@ -5,13 +5,6 @@ const generarJWT = require("../../helpers/generarJW.js");
 const registrar = async (req, res) => {
     //Evitar registros duplicados 
     const { email } = req.body;
-    const existeUsuario = await usuarioWango.findOne({ email });
-    const { NoIdentificacion } = req.body;
-    const existeUsuarioID = await usuarioWango.findOne({ NoIdentificacion });
-    if(existeUsuario || existeUsuarioID) {
-        const error = new Error("Usuario ya registrado");
-        return res.status(400).json({ msg: error.message });
-    }
     try{
         const usuario = new usuarioWango(req.body);
         usuario.token = generarId();
@@ -33,10 +26,7 @@ const autenticar = async (req, res) =>{
         return res.status(404).json({ msg: error.message });
     }
     //confirmar si el usuario está confirmado
-    if(!usuario.confirmado){
-        const error = new Error("Tu cuenta no ha sido confirmada");
-        return res.status(403).json({ msg: error.message });
-    }
+    
     //Comprobar password
     if(await usuario.comprobarPassword(password)) {
         res.json({
