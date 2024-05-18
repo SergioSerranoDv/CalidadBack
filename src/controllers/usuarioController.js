@@ -1,16 +1,36 @@
 const generarId = require("../../helpers/generarId.js");
 const usuarioWango = require("../models/usuarioModel.js");
 const generarJWT = require("../../helpers/generarJW.js");
+const validator = require('validator');
 
 const registrar = async (req, res) => {
-    //Evitar registros duplicados 
-    const { email } = req.body;
-    try{
+    const { email, password } = req.body;
+
+    if (!validator.isEmail(email)) {
+        return res.status(400).json({ msg: "El email no es válido" });
+    }
+
+    if (!validator.isStrongPassword(password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+    })) {
+        return res.status(400).json({ msg: "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, un número y un símbolo" });
+    }
+
+    try {
+        const existeUsuario = await usuarioWango.findOne({ email });
+        if (existeUsuario) {
+            return res.status(400).json({ msg: "El usuario ya está registrado" });
+        }
+
         const usuario = new usuarioWango(req.body);
         usuario.token = generarId();
         const usuarioAlmacenado = await usuario.save();
         res.json(usuarioAlmacenado);
-    }catch (error){
+    } catch (error) {
         console.log(error);
     }
 };
