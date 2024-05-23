@@ -1,2 +1,2 @@
-# wangoBackend
-# Prueba
+### 'INICIAR PROYECTO'
+### `npm start`
